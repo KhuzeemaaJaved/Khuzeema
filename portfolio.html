@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Khuzeema Javed — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Special+Elite&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #e8e4d4;
+    background-image:
+      linear-gradient(rgba(100,110,80,0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100,110,80,0.18) 1px, transparent 1px);
+    background-size: 28px 28px;
+    min-height: 100vh;
+    font-family: 'VT323', monospace;
+  }
+
+  .desktop {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 16px 90px;
+    min-height: 100vh;
+  }
+
+  .big-title {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(30px, 7.5vw, 56px);
+    color: #6b7a52;
+    letter-spacing: clamp(2px, 1.5vw, 6px);
+    text-align: center;
+    margin: 8px 0 18px;
+    opacity: 0.85;
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 4px;
+    margin-bottom: 16px;
+  }
+  .nav-col { display: flex; flex-direction: column; gap: 12px; }
+
+  @media (max-width: 380px) {
+    .nav-row { flex-direction: column; align-items: center; }
+    .nav-title-wrap { order: -1; width: 100%; }
+    .nav-col { flex-direction: row; gap: 14px; justify-content: center; }
+  }
+
+  .desktop-icon {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 4px; cursor: pointer; width: 62px;
+    transition: transform 0.1s; -webkit-tap-highlight-color: transparent;
+  }
+  .desktop-icon:hover { transform: scale(1.08); }
+  .desktop-icon:active { transform: scale(0.95); }
+
+  .icon-img {
+    width: 46px; height: 46px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; font-size: 22px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.18);
+  }
+  .icon-h { background: #4a5c3a; border: 2px solid #3a4a2c; color: #fff; font-family: 'Special Elite', cursive; font-size: 20px; font-weight: bold; letter-spacing: 0; }
+  .icon-folder { background: #f5c842; border: 2px solid #d4a020; color: #7a5800; }
+
+  .icon-label {
+    font-size: 13px; color: #3a3a2e; text-align: center; line-height: 1;
+    background: rgba(232,228,212,0.8); padding: 1px 5px; border-radius: 2px;
+  }
+
+  /* Window */
+  .win98-window {
+    background: #f0ece0; border: 2px solid #a0966a; border-radius: 4px;
+    width: 100%; max-width: 480px; margin: 0 auto 20px;
+    box-shadow: 3px 3px 0 #9a9060; animation: popIn 0.2s ease;
+  }
+  @keyframes popIn { from { transform: scale(0.96); opacity: 0.5; } to { transform: scale(1); opacity: 1; } }
+
+  .win-titlebar {
+    background: #6b7a52; padding: 5px 8px;
+    display: flex; align-items: center; justify-content: space-between; border-radius: 2px 2px 0 0;
+  }
+  .win-title { color: #f0ece0; font-size: 15px; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .win-close {
+    background: #e05050; color: #fff; border: 1.5px solid #a03030; border-radius: 3px;
+    width: 20px; height: 18px; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .win-body { padding: 14px 16px 16px; }
+
+  /* Profile */
+  .profile-content { display: flex; gap: 14px; align-items: center; }
+  .avatar-circle {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: linear-gradient(135deg, #8a9e6a, #4a5c3a);
+    border: 3px solid #6b7a52;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0; color: #fff;
+    font-family: 'Special Elite', cursive; font-weight: bold; letter-spacing: 1px;
+  }
+  .profile-text h2 { font-family: 'Special Elite', cursive; font-size: clamp(17px, 4vw, 22px); color: #e07030; margin-bottom: 2px; line-height: 1.1; }
+  .profile-text .greeting { font-size: 15px; color: #5a5a48; margin-bottom: 3px; }
+  .profile-text .role-tag { font-size: 13px; color: #6b7a52; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+  .profile-text .quote { font-size: 12px; color: #8a8870; font-style: italic; font-family: 'Special Elite', cursive; }
+  @media (max-width: 340px) { .profile-content { flex-direction: column; text-align: center; } }
+
+  /* Tabs */
+  .section-tabs { display: flex; border-bottom: 2px solid #b0a870; margin-bottom: 14px; }
+  .tab-btn {
+    font-family: 'VT323', monospace; font-size: 15px; padding: 4px 14px;
+    background: #ddd8c0; border: 1.5px solid #b0a870; border-bottom: none;
+    cursor: pointer; color: #5a5040; border-radius: 3px 3px 0 0; transition: background 0.1s;
+  }
+  .tab-btn.active { background: #6b7a52; color: #f0ece0; }
+  .tab-btn:hover:not(.active) { background: #c8c4ac; }
+
+  /* Tools grid with FA icons */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+    gap: 12px; margin-top: 4px;
+  }
+  .tool-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .tool-icon {
+    width: 50px; height: 50px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 26px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .tool-label { font-size: 12px; color: #5a5040; text-align: center; line-height: 1.2; }
+
+  /* Projects */
+  .projects-list { display: flex; flex-direction: column; gap: 10px; }
+  .project-card {
+    background: #e8e0c8; border: 1.5px solid #b0a870; border-radius: 4px;
+    padding: 10px 12px; cursor: pointer; transition: background 0.1s;
+  }
+  .project-card:hover { background: #d8d0b0; }
+  .proj-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 3px; }
+  .proj-name { font-size: 15px; color: #3a3a28; }
+  .proj-tag { font-size: 12px; padding: 2px 8px; border-radius: 3px; background: #6b7a52; color: #e8f0d8; white-space: nowrap; }
+  .proj-desc { font-size: 12px; color: #7a7060; font-family: 'Special Elite', cursive; }
+
+  /* Contact */
+  .email-direct {
+    display: flex; align-items: center; gap: 10px;
+    background: #e8e0c8; border: 1.5px solid #b0a870; border-radius: 4px;
+    padding: 10px 12px; margin-bottom: 12px;
+  }
+  .email-direct a { color: #4a5c3a; font-size: 14px; text-decoration: none; word-break: break-all; }
+  .email-direct a:hover { text-decoration: underline; }
+  .contact-form { display: flex; flex-direction: column; gap: 10px; }
+  .form-row { display: flex; flex-direction: column; gap: 3px; }
+  .form-label { font-size: 15px; color: #6b6a50; }
+  .form-input {
+    font-family: 'VT323', monospace; font-size: 16px;
+    background: #fff8e8; border: 1.5px solid #b0a870; border-radius: 3px;
+    padding: 5px 8px; color: #3a3a28; outline: none; width: 100%;
+  }
+  .form-input:focus { border-color: #6b7a52; }
+
+  .send-btn {
+    font-family: 'VT323', monospace; font-size: 18px;
+    background: #6b7a52; color: #f0ece0;
+    border: 2px solid #3a4a2c; border-radius: 4px;
+    padding: 6px 20px; cursor: pointer; letter-spacing: 1px;
+    transition: background 0.1s; -webkit-tap-highlight-color: transparent;
+  }
+  .send-btn:hover { background: #4a5c3a; }
+  .send-btn:active { transform: scale(0.97); }
+
+  /* Resume */
+  .resume-heading { color: #6b7a52; font-size: 16px; letter-spacing: 1px; margin-bottom: 6px; border-bottom: 1px dashed #b0a870; padding-bottom: 3px; }
+  .resume-section { margin-bottom: 14px; }
+  .resume-entry { display: flex; gap: 8px; margin-bottom: 6px; font-size: 14px; color: #5a5040; line-height: 1.4; }
+  .resume-dot { color: #6b7a52; flex-shrink: 0; }
+  .resume-date { color: #9a9070; font-size: 12px; }
+  .resume-sub { font-size: 12px; color: #8a8060; }
+  .skill-pill { background: #6b7a52; color: #e8f0d8; padding: 2px 10px; border-radius: 3px; font-size: 13px; }
+
+  /* Taskbar */
+  .taskbar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #6b7a52; padding: 10px 16px;
+    display: flex; justify-content: center; gap: 14px; z-index: 100;
+  }
+  .social-btn {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+    cursor: pointer; border: 2px solid rgba(255,255,255,0.2);
+    transition: transform 0.12s; color: #fff; text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .social-btn:hover { transform: scale(1.12); }
+  .s-li { background: #0a66c2; }
+  .s-gh { background: #1a1a2e; }
+  .s-mail { background: #ea4335; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .status-bar {
+    font-size: 13px; color: #8a8060;
+    border-top: 1.5px solid #c0b880;
+    padding-top: 8px; margin-top: 10px; letter-spacing: 1px;
+  }
+  .welcome-btns { margin: 14px 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<div class="desktop">
+
+  <div class="nav-row">
+    <div class="nav-col">
+      <div class="desktop-icon" onclick="showPanel('profile')">
+        <div class="icon-img icon-h">KJ</div>
+        <span class="icon-label">profile</span>
+      </div>
+      <div class="desktop-icon" onclick="showPanel('works')">
+        <div class="icon-img icon-folder"><i class="fa-solid fa-folder"></i></div>
+        <span class="icon-label">works</span>
+      </div>
+    </div>
+
+    <div class="nav-title-wrap" style="flex:1; text-align:center; padding: 0 8px;">
+      <div class="big-title">PORTFOLIO</div>
+    </div>
+
+    <div class="nav-col" style="align-items:flex-end;">
+      <div class="desktop-icon" onclick="showPanel('contact')">
+        <div class="icon-img icon-folder"><i class="fa-solid fa-folder"></i></div>
+        <span class="icon-label">contact</span>
+      </div>
+      <div class="desktop-icon" onclick="showPanel('resume')">
+        <div class="icon-img icon-folder"><i class="fa-solid fa-folder"></i></div>
+        <span class="icon-label">resume</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Welcome -->
+  <div id="panel-welcome" class="win98-window panel active">
+    <div class="win-titlebar">
+      <span class="win-title">C:\KHUZEEMA\portfolio</span>
+      <div class="win-close" onclick="closePanel('welcome')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="win-body">
+      <div style="text-align:center; padding: 8px 0 4px;">
+        <div style="font-size:26px; color:#6b7a52; letter-spacing:2px;">WELCOME</div>
+        <div style="font-size:14px; color:#8a8060; margin-top:5px;">Tap a folder to explore</div>
+        <div class="welcome-btns">
+          <button class="send-btn" onclick="showPanel('profile')"><i class="fa-solid fa-user"></i> profile</button>
+          <button class="send-btn" onclick="showPanel('works')"><i class="fa-solid fa-wrench"></i> works</button>
+          <button class="send-btn" onclick="showPanel('contact')"><i class="fa-solid fa-envelope"></i> contact</button>
+        </div>
+        <div class="status-bar">C:\&gt; system ready_</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile -->
+  <div id="panel-profile" class="win98-window panel">
+    <div class="win-titlebar">
+      <span class="win-title">C:\KHUZEEMA\profile</span>
+      <div class="win-close" onclick="closePanel('profile')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="win-body">
+      <div class="profile-content">
+        <div class="avatar-circle">KJ</div>
+        <div class="profile-text">
+          <div class="greeting">hi! i'm</div>
+          <h2>Khuzeema Javed</h2>
+          <div class="role-tag">Student Developer &amp; Designer</div>
+          <div class="quote">"Started from zero, building something real."</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:13px; color:#6a6a50; line-height:1.6; font-family:'Special Elite',cursive;">
+        9th grader with a passion for building things on the web. Started coding in December 2024 and haven't stopped since. Currently exploring HTML, CSS, JS, Python, and design.
+      </div>
+      <div class="status-bar" style="margin-top:12px;">C:\KHUZEEMA\profile&gt; loaded_</div>
+    </div>
+  </div>
+
+  <!-- Works -->
+  <div id="panel-works" class="win98-window panel">
+    <div class="win-titlebar">
+      <span class="win-title">C:\KHUZEEMA\works</span>
+      <div class="win-close" onclick="closePanel('works')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="win-body">
+      <div class="section-tabs">
+        <button class="tab-btn active" onclick="switchTab(this,'tools')">TOOLS</button>
+        <button class="tab-btn" onclick="switchTab(this,'projects')">PROJECTS</button>
+      </div>
+
+      <div id="tab-tools">
+        <div class="tools-grid">
+          <div class="tool-item">
+            <div class="tool-icon" style="background:#e44d26; color:#fff;">
+              <i class="fa-brands fa-html5"></i>
+            </div>
+            <span class="tool-label">HTML</span>
+          </div>
+          <div class="tool-item">
+            <div class="tool-icon" style="background:#264de4; color:#fff;">
+              <i class="fa-brands fa-css3-alt"></i>
+            </div>
+            <span class="tool-label">CSS</span>
+          </div>
+          <div class="tool-item">
+            <div class="tool-icon" style="background:#f7df1e; color:#333;">
+              <i class="fa-brands fa-js"></i>
+            </div>
+            <span class="tool-label">JavaScript</span>
+          </div>
+          <div class="tool-item">
+            <div class="tool-icon" style="background:#3572A5; color:#fff;">
+              <i class="fa-brands fa-python"></i>
+            </div>
+            <span class="tool-label">Python</span>
+          </div>
+          <div class="tool-item">
+            <div class="tool-icon" style="background:#1a1a2e; color:#fff;">
+              <i class="fa-brands fa-github"></i>
+            </div>
+            <span class="tool-label">GitHub</span>
+          </div>
+          <div class="tool-item">
+            <div class="tool-icon" style="background:#007acc; color:#fff;">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <span class="tool-label">VS Code</span>
+          </div>
+          <div class="tool-item">
+            <div class="tool-icon" style="background:#00c4cc; color:#fff;">
+              <i class="fa-solid fa-palette"></i>
+            </div>
+            <span class="tool-label">Canva</span>
+          </div>
+          <div class="tool-item">
+            <div class="tool-icon" style="background:#6b7a52; color:#fff;">
+              <i class="fa-solid fa-list-check"></i>
+            </div>
+            <span class="tool-label">Proj. Mgmt</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-projects" style="display:none;">
+        <div class="projects-list">
+          <div class="project-card">
+            <div class="proj-header">
+              <span class="proj-name"><i class="fa-solid fa-globe" style="color:#6b7a52;"></i> Personal Portfolio Site</span>
+              <span class="proj-tag">HTML · CSS</span>
+            </div>
+            <div class="proj-desc">Built this very portfolio using HTML &amp; CSS from scratch</div>
+          </div>
+          <div class="project-card">
+            <div class="proj-header">
+              <span class="proj-name"><i class="fa-brands fa-python" style="color:#3572A5;"></i> Python Calculator</span>
+              <span class="proj-tag">Python</span>
+            </div>
+            <div class="proj-desc">Command-line calculator with basic operations</div>
+          </div>
+          <div class="project-card">
+            <div class="proj-header">
+              <span class="proj-name"><i class="fa-solid fa-palette" style="color:#00c4cc;"></i> Canva Brand Kit</span>
+              <span class="proj-tag">Design</span>
+            </div>
+            <div class="proj-desc">Designed social media templates &amp; logos</div>
+          </div>
+          <div class="project-card">
+            <div class="proj-header">
+              <span class="proj-name"><i class="fa-solid fa-check-double" style="color:#6b7a52;"></i> JS To-Do App</span>
+              <span class="proj-tag">JS · CSS</span>
+            </div>
+            <div class="proj-desc">Interactive task manager with local storage</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-bar" style="margin-top:14px;" id="works-status">C:\KHUZEEMA\works&gt; 8 tools found_</div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div id="panel-contact" class="win98-window panel">
+    <div class="win-titlebar">
+      <span class="win-title">C:\KHUZEEMA\contact</span>
+      <div class="win-close" onclick="closePanel('contact')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="win-body">
+      <div class="email-direct">
+        <i class="fa-solid fa-envelope" style="color:#6b7a52; font-size:18px; flex-shrink:0;"></i>
+        <a href="mailto:khuzeemajofficial@gmail.com">khuzeemajofficial@gmail.com</a>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <label class="form-label"><i class="fa-solid fa-user" style="font-size:13px;"></i> YOUR NAME:</label>
+          <input class="form-input" type="text" placeholder="your name..." />
+        </div>
+        <div class="form-row">
+          <label class="form-label"><i class="fa-solid fa-at" style="font-size:13px;"></i> YOUR EMAIL:</label>
+          <input class="form-input" type="email" placeholder="your@email.com..." />
+        </div>
+        <div class="form-row">
+          <label class="form-label"><i class="fa-solid fa-comment" style="font-size:13px;"></i> MESSAGE:</label>
+          <textarea class="form-input" rows="3" placeholder="say something nice..."></textarea>
+        </div>
+        <button class="send-btn" onclick="flashSend(this)"><i class="fa-solid fa-paper-plane"></i> [ SEND ]</button>
+      </div>
+      <div class="status-bar" style="margin-top:10px;">C:\KHUZEEMA\contact&gt; ready_</div>
+    </div>
+  </div>
+
+  <!-- Resume -->
+  <div id="panel-resume" class="win98-window panel">
+    <div class="win-titlebar">
+      <span class="win-title">C:\KHUZEEMA\resume.txt</span>
+      <div class="win-close" onclick="closePanel('resume')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="win-body" style="font-size:14px; color:#5a5040; line-height:1.6;">
+
+      <div class="resume-section">
+        <div class="resume-heading"><i class="fa-solid fa-circle-info" style="font-size:13px;"></i> ABOUT</div>
+        <div style="font-size:13px; color:#6a6a50; font-family:'Special Elite',cursive; line-height:1.5;">
+          9th grade student, self-taught developer &amp; designer. Started in December 2024, learning fast and building real things.
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <div class="resume-heading"><i class="fa-solid fa-briefcase" style="font-size:13px;"></i> EXPERIENCE</div>
+        <div class="resume-entry">
+          <span class="resume-dot"><i class="fa-solid fa-caret-right"></i></span>
+          <div>
+            <div>Freelance Web Designer <span class="resume-date">· Dec 2024 – present</span></div>
+            <div class="resume-sub">Designing landing pages &amp; graphics for small clients using HTML, CSS, and Canva.</div>
+          </div>
+        </div>
+        <div class="resume-entry">
+          <span class="resume-dot"><i class="fa-solid fa-caret-right"></i></span>
+          <div>
+            <div>Personal Projects Developer <span class="resume-date">· Dec 2024 – present</span></div>
+            <div class="resume-sub">Building web apps and Python scripts independently — portfolio site, to-do app, calculator.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <div class="resume-heading"><i class="fa-solid fa-graduation-cap" style="font-size:13px;"></i> EDUCATION</div>
+        <div class="resume-entry">
+          <span class="resume-dot"><i class="fa-solid fa-caret-right"></i></span>
+          <div>
+            <div>9th Grade Student <span class="resume-date">· 2026 – present</span></div>
+            <div class="resume-sub">Balancing school with self-taught coding and design.</div>
+          </div>
+        </div>
+        <div class="resume-entry">
+          <span class="resume-dot"><i class="fa-solid fa-caret-right"></i></span>
+          <div>
+            <div>Self-taught via freeCodeCamp, YouTube &amp; docs <span class="resume-date">· Dec 2024 – present</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <div class="resume-heading"><i class="fa-solid fa-star" style="font-size:13px;"></i> SKILLS</div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;">
+          <span class="skill-pill"><i class="fa-brands fa-html5"></i> HTML</span>
+          <span class="skill-pill"><i class="fa-brands fa-css3-alt"></i> CSS</span>
+          <span class="skill-pill"><i class="fa-brands fa-js"></i> JavaScript</span>
+          <span class="skill-pill"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="skill-pill"><i class="fa-solid fa-palette"></i> Canva</span>
+          <span class="skill-pill"><i class="fa-solid fa-list-check"></i> Proj. Mgmt</span>
+        </div>
+      </div>
+
+      <div class="status-bar" style="margin-top:6px;">C:\KHUZEEMA\resume&gt; file opened_</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Taskbar -->
+<div class="taskbar">
+  <a class="social-btn s-li" href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+    <i class="fa-brands fa-linkedin-in"></i>
+  </a>
+  <a class="social-btn s-gh" href="https://github.com/yourusername" target="_blank" title="GitHub">
+    <i class="fa-brands fa-github"></i>
+  </a>
+  <a class="social-btn s-mail" href="mailto:khuzeemajofficial@gmail.com" title="Email">
+    <i class="fa-solid fa-envelope"></i>
+  </a>
+</div>
+
+<script>
+  function showPanel(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+  }
+  function closePanel(name) {
+    document.getElementById('panel-' + name).classList.remove('active');
+    document.getElementById('panel-welcome').classList.add('active');
+  }
+  function switchTab(btn, tabName) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-tools').style.display = tabName === 'tools' ? '' : 'none';
+    document.getElementById('tab-projects').style.display = tabName === 'projects' ? '' : 'none';
+    document.getElementById('works-status').textContent = 'C:\\KHUZEEMA\\works> ' + tabName + ' loaded_';
+  }
+  function flashSend(btn) {
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> [ SENT! ]';
+    btn.style.background = '#3a7a42';
+    setTimeout(() => { btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> [ SEND ]'; btn.style.background = ''; }, 2000);
+  }
+</script>
+
+</body>
+</html>
